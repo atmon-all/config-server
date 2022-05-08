@@ -1,0 +1,6 @@
+{
+    "port": 9001,
+    "logger": {
+        "path": "logs/server.log"
+    }
+}

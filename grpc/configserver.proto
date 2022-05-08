@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.atmon.config.server.grpc";
+option go_package = "github.com/atmom/configserver/grpc";
+
+package configserver;
+
+// Services of flow center.
+service ConfigServer {
+
+    // Get Flow configuration from config server.
+    rpc GetFlow (GetFlowRequest) returns (GetFlowResponse) {}
+}
+
+// Get flow configuration request.
+message GetFlowRequest {
+    // configuration ID.
+    repeated string ids = 1;
+}
+
+// Get flow configuration response.
+message GetFlowResponse {
+    // Responsed code from config server.
+    int32 code = 1;
+
+    // Responsed message from config server.
+    string message = 2;
+
+    // Responsed flow configuration from config server.
+    repeated FlowConfig flows = 3;
+}
+
+// Flow configuration.
+message FlowConfig {
+    // Flow ID.
+    string id = 1;
+
+    // Flow name.
+    string name = 2;
+
+    // Flow description.
+    string desc = 3;
+
+    // Flow status.
+    string status = 4;
+
+    // Flow requset.
+    string request = 5;
+
+    // Flow response.
+    string response = 6;
+
+    // Flow nodes.
+    repeated FlowNode nodes = 7;
+}
+
+// Flow node Configuration.
+message FlowNode {
+    // Flow node ID.
+    string id = 1;
+
+    // Flow node name.
+    string name = 2;
+
+    // Flow node description.
+    string desc = 3;
+
+    // Flow node server type, values are 'Golang','Java' or 'NodeJS'.
+    string type = 4;
+
+    // Flow context define.
+    string context = 5;
+}
